@@ -79,20 +79,32 @@ namespace SchoolHRAdministration
             switch(employeeType)
             {
                 case EmployeeType.Teacher:
-                    employee = new Teacher {Id = id, FirstName = firstName, LastName = lastName, Salary = salary};
+                    employee = FactoryPattern<IEmployee, Teacher>.GetInstance();
                     break;
                 case EmployeeType.HeadOfDepartment:
-                    employee = new HeadOfDepartment {Id = id, FirstName = firstName, LastName = lastName, Salary = salary};
+                    employee = FactoryPattern<IEmployee, HeadOfDepartment>.GetInstance();
                     break;
                 case EmployeeType.DeputyHeadMaster:
-                    employee = new DeputyHeadMaster {Id = id, FirstName = firstName, LastName = lastName, Salary = salary};
+                    employee = FactoryPattern<IEmployee, DeputyHeadMaster>.GetInstance();
                     break;
                 case EmployeeType.HeadMaster:
-                    employee = new HeadMaster {Id = id, FirstName = firstName, LastName = lastName, Salary = salary};
+                    employee = FactoryPattern<IEmployee, HeadMaster>.GetInstance();
                     break;
                 default:
                     break;
             }
+            if (employee != null)
+            {
+                employee.Id = id;
+                employee.FirstName = firstName;
+                employee.LastName = lastName;
+                employee.Salary = salary;
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
+
             return employee;
         }
     }

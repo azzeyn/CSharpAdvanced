@@ -10,7 +10,9 @@ namespace HRAdministrationAPI
     {
         public static K GetInstance()
         {
-
+            K objK;
+            objK = new T();
+            return objK;
         }
     }
 }
