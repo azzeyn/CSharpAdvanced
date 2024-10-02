@@ -9,19 +9,31 @@ namespace DelegateBasicExample
         static void Main(string[] args)
         {
             Log log = new Log();
-            LogDel logDel = new LogDel(log.LogTextToScreen);
+
+            LogDel logTextToScreenDel, logTextToFileDel;
+
+            logTextToScreenDel = new LogDel(log.LogTextToScreen);
+
+            logTextToFileDel = new LogDel(log.LogTextToFile);
+
+            LogDel multiLogDel = logTextToScreenDel + logTextToFileDel;
 
             Console.WriteLine("Please enter your name: ");
 
             var name = Console.ReadLine();
 
-            logDel(name);
+            LogText(logTextToScreenDel, name);
 
-            LogDel logDelFile = new LogDel(log.LogTextToFile);
+            LogText(logTextToFileDel, name);
 
-            logDelFile(name);
+            LogText(multiLogDel, name);
 
             Console.ReadKey();
+        }
+
+        static void LogText(LogDel logDel, string text)
+        {
+            logDel(text);
         }
 
     }
