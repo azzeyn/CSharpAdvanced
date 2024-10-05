@@ -10,14 +10,14 @@ namespace FieldValidatorAPI
     public delegate bool RequiredValidDel(string fieldVal);
     public delegate bool StringLengValidDel(string fieldVal, int min, int max);
     public delegate bool DateValidDel(string fieldVal, out DateTime validDate);
-    public delegate bool PatternMatchDel(string fieldVal, string pattern);
+    public delegate bool PatternMatchValidDel(string fieldVal, string pattern);
     public delegate bool CompareFieldsValidDel(string fieldVal, string fieldValCompare);
     public class CommonFieldValidatorFunctions
     {
         private static RequiredValidDel _requiredValidDel = null;
         private static StringLengValidDel _stringLengValidDel = null;
         private static DateValidDel _dateValidDel = null;
-        private static PatternMatchDel _patternMatchDel = null;
+        private static PatternMatchValidDel _patternMatchValidDel = null;
         private static CompareFieldsValidDel _compareFieldsValidDel = null;
 
         public static RequiredValidDel RequiredValidDel
@@ -50,14 +50,14 @@ namespace FieldValidatorAPI
                 return _dateValidDel;
             }
         }
-        public static PatternMatchDel PatternMatchDel
+        public static PatternMatchValidDel PatternMatchValidDel
         {
             get
             {
-                if (_patternMatchDel == null)
-                    _patternMatchDel = new PatternMatchDel(FieldPatternValid);
+                if (_patternMatchValidDel == null)
+                    _patternMatchValidDel = new PatternMatchValidDel(FieldPatternValid);
 
-                return _patternMatchDel;
+                return _patternMatchValidDel;
             }
         }
         public static CompareFieldsValidDel CompareFieldsValidDel
